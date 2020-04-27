@@ -1,25 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { Route, Switch } from 'react-router-dom';
+import Home from './pages/Home';
+import Signin from './pages/Signin';
+import NotFound from './pages/NotFound';
+import withAuth from './hocs/withAuth';
+import ErrorBoundary from 'react-error-boundary'
+import myBookList from './pages/myBookList';
+import {ConnectedRouter} from 'connected-react-router';
+import {history} from './redux/create';
 
 function App() {
+const ErrorFallbackComponent = ({error})=><div>{error.message}</div>
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ErrorBoundary FallbackComponent={ErrorFallbackComponent} >
+    <ConnectedRouter history={history}>
+      <Switch>
+        <Route exact path="/signin" component={Signin} />
+        <Route exact path ="/bookList" component={myBookList}/>
+        <Route exact path="/" component={withAuth(Home)}/>
+        <Route component={NotFound} />
+      </Switch>
+    </ConnectedRouter>
+    </ErrorBoundary>
   );
 }
 
