@@ -1,4 +1,3 @@
-import React from 'react';
 import {connect} from 'react-redux';
 import { EditModal } from '../components/EditModal';
 import { editBookSaga } from '../redux/modules/books';

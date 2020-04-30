@@ -91,7 +91,6 @@ function* editBook(books) {
   }
 }
 
-
 export function* booksSaga() {
   yield takeLatest(requestBooksSaga, requestBooks);
   yield takeLatest(removeBooksSaga, removeBook);
