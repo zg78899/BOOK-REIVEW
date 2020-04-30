@@ -7,7 +7,40 @@
 .site-layout-sub-header-background {
   background: #fff;
 }
-
 .site-layout-background {
   background: #fff;
+}
+.logo{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height:auto;
+  margin: 10px;;
+}
+.profile-wrapper{
+  border-radius: 50%;
+  height: 100px;
+  width:100px;
+  background: white;
+  text-align: center;
+  border: 5px solid #eeeeee;
+  overflow: hidden;
+}
+.profile{
+  width: 90px;
+  border-radius: 100%;
+  transform: translateX(1px);
+}
+.user-detail{
+  padding-top:10px;
+  color:white;
+}
+.dev .email{
+  text-align: left;
+}
+p{
+  margin: 0;
+}
+p:nth-child(2n){
+  padding-top: 10px;
 }

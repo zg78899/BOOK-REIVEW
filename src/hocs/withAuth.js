@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux';
 
 function withAuth(Component) {
   function WrapperComponent(props){
-    // const token = localStorage.getItem('token');
     const token = useSelector(state => state.auth.token);
   
     if(token === null){

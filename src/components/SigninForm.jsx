@@ -103,9 +103,7 @@ function SigninForm({loading,error,login }) {
 
   const emailInput = React.createRef();
   const passwordInput = React.createRef();
-  // const history = useHistory();
 
-  // const [isLoading,setIsLoading] = useState(false);
 
    function click() {
     const email = emailInput.current.value;

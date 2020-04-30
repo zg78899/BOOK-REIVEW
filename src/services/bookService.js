@@ -4,7 +4,6 @@ const BOOK_API_URL ="https://api.marktube.tv/v1/book"
 
 export default class bookService {
 
-  
   static async getBooks(token){
     return  axios.get(BOOK_API_URL, {
       headers: {
@@ -28,7 +27,6 @@ export default class bookService {
       }
       });
   }
-
   static async addBook(token, book) {
     return axios.post(BOOK_API_URL, book, {
       headers: {

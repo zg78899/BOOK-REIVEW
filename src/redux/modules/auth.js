@@ -3,15 +3,6 @@ import loginService from '../../services/loginService';
 import { push } from 'connected-react-router';
 import { createActions, handleActions } from 'redux-actions';
 
-// const LOGIN_PENDING = 'books-review/auth/LOGIN_PENDING';
-// const LOGIN_SUCCESS = 'books-review/auth/LOGIN_SUCCESS';
-// const LOGIN_FAIL = 'books-review/auth/LOGIN_FAIL';
-
-//액션 생성자 함수
-// export const loginPending = () => ({ type: LOGIN_PENDING });
-// export const loginSuccess = (token) => ({ type: LOGIN_SUCCESS, token });
-// export const loginFail = error => ({ type: LOGIN_FAIL, error });
-
 const options = {
   prefix: 'books-review/auth'
 };
@@ -28,31 +19,7 @@ const initalState = {
   loading: false,
   error: null
 }
-//리듀서
-// const auth = (state = initalState, action) => {
-//   switch (action.type) {
-//     case LOGIN_PENDING:
-//       return {
-//         token: null,
-//         loading: true,
-//         error: null
-//       }
-//     case LOGIN_SUCCESS:
-//       return {
-//         toeken: action.token,
-//         loading: false,
-//         error: null
-//       }
-//     case LOGIN_FAIL:
-//       return {
-//         token: null,
-//         loading: false,
-//         error: action.error,
-//       }
-//     default:
-//       return state;
-//   }
-// }
+
 const auth = handleActions({
   LOGIN_PENDING: (state, action) => ({
     token: null,
@@ -65,7 +32,7 @@ const auth = handleActions({
     error: null
   }),
   LOGIN_FAIL: (state, action) => ({
-    token: null,
+    token:null,
     loading: false,
     error: action.payload
   })
@@ -88,7 +55,7 @@ export const loginSaga = (email, password) => ({
   }
 });
 export const logoutSaga = () => ({
-  type: LOGOUT_SAGA
+  type: LOGOUT_SAGA,
 });
 
 //실제 동작할 사가 함수
@@ -108,6 +75,7 @@ export function* login(action) {
     yield put(loginFail(error));
   }
 }
+
 export function* logout() {
   try {
     const token = yield select(state => state.auth.token);

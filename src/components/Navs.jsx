@@ -3,9 +3,9 @@ import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { Modal } from 'antd';
 import { useState } from 'react';
-// import BookAddForm from './BookAddForm';
 import AddBookContainer from '../containers/AddBookContainer';
 import { v4 as uuidv4 } from 'uuid';
+
 const NavWrapper = styled.div`
 display:flex;
 `;
@@ -39,7 +39,8 @@ text-align:right;
 const PopupContent =styled.div`
 text-align:center;
 `;
-function Navs({ token, requestBooks,logout }) {
+
+function Navs({ token,requestBooks,logout }) {
   const [visible, setVisible] = useState(false);
   const history = useHistory();
 
@@ -50,11 +51,11 @@ function Navs({ token, requestBooks,logout }) {
   const handleCancel = e => {
     setVisible(false);
   };
-
  function click(){
   logout(token);
- }
-
+}
+console.log(logout);
+console.log(typeof logout());
   return (
     <NavWrapper>
       <Link to="/">

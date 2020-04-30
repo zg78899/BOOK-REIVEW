@@ -2,14 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 import Navs from '../components/Navs';
 
-
-
 const StyledWrapper = styled.div`
 display:flex;
 flex-direction:column;
 align-items:center;
 justify-items:center;
-
+transform: translateY(91px);
+.not-found{
+  width:50%;
+}
 p{
   align-items:center;
   padding-top:30px;
@@ -27,7 +28,6 @@ button{
   border-radius:10px;
   margin:0 10px;
   font-weight:700; 
-  /* background:black; */
   &:hover{
     cursor:pointer;
   }
@@ -46,7 +46,7 @@ button{
   }
 `;
 
-function NotFound({ history }) {
+function NotFound({ history ,logout}) {
 
   const goBack = () => {
     history.goBack();
@@ -56,9 +56,9 @@ function NotFound({ history }) {
   }
   return (
     <div>
-      <Navs />
+      <Navs logout={logout}/>
       <StyledWrapper>
-        <img src="/notFound.png" alt="notFound" />
+        <img className="not-found" src="/notFound.png" alt="notFound" />
         <p>
           <span>OPPS!!</span>
            &nbsp;&nbsp;찾을 수 없는 페이지 입니다.
