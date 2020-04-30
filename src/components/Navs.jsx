@@ -54,7 +54,7 @@ function Navs({ token,requestBooks,logout }) {
  function click(){
   logout(token);
 }
-console.log(logout);
+console.log(logout(token));
 console.log(typeof logout());
   return (
     <NavWrapper>
