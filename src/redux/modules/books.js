@@ -3,7 +3,9 @@ import bookService from '../../services/bookService';
 import { createAction, createActions, handleActions } from 'redux-actions';
 
 
-const options = { prefix: 'books-review/books' };
+const options = {
+   prefix: 'books-review/books'
+   };
 
 const { getBooksFail, getBooksPending, getBooksSuccess } = createActions(
   {
@@ -14,15 +16,8 @@ const { getBooksFail, getBooksPending, getBooksSuccess } = createActions(
   options
 );
 
-
-const initalState = {
-  books: [],
-  loading: false,
-  error: null
-}
-
 //saga
-export const requestBooksSaga = createAction('START_REQUEST_BOOKS_SAGA ');
+export const requestBooksSaga = createAction('START_REQUEST_BOOKS_SAGA');
 export const removeBooksSaga = createAction('REMOVE_BOOKS_SAGA');
 export const addBookSaga = createAction('ADD_BOOK_SAGA');
 export const editBookSaga = createAction('EDIT_BOOK_SAGA');
@@ -30,9 +25,12 @@ export const editBookSaga = createAction('EDIT_BOOK_SAGA');
 
 export function* requestBooks() {
   const token = yield select(state => state.auth.token);
+  console.log(token);
   try {
     yield put(getBooksPending());
     const response = yield call(bookService.getBooks, token);
+    console.log(response);
+    console.log(response.data);
     yield delay(1000);
     const books = response.data;
     yield put(getBooksSuccess(books));
@@ -97,6 +95,11 @@ export function* booksSaga() {
   yield takeLatest(addBookSaga, addBook);
   yield takeLatest(editBookSaga, editBook);
 }
+const initalState = {
+  books: [],
+  loading: false,
+  error: null
+}
 
 //리듀서
 const books = handleActions({
@@ -106,6 +109,7 @@ const books = handleActions({
     loading: true,
     error: null
   }),
+  
   GET_BOOKS_SUCCESS: (state, action) => ({
     books: action.payload.books,
     loading: false,

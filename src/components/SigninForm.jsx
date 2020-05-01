@@ -105,7 +105,7 @@ function SigninForm({loading,error,login }) {
   const passwordInput = React.createRef();
 
 
-   function click() {
+   function signIn() {
     const email = emailInput.current.value;
     const password = passwordInput.current.value;
 
@@ -123,10 +123,10 @@ function SigninForm({loading,error,login }) {
     }
   },[error]);
 
-  async function Enter(e){
-    if(e.keyCode !== 13) return;
-    click();
-  }
+  // const Enter =async (e)=>{
+  //   if(e.keyCode !== 13)return;
+  //   signIn();
+  // }
 
   return (
     <StyledCol>
@@ -155,11 +155,11 @@ function SigninForm({loading,error,login }) {
             type="password"
             placeholder="Enter your password"
             ref={passwordInput}
-            onKeyDown={e=>Enter(e)}
+            // onKeyDown={e=>Enter(e)}
           />
         </div>
         <ButtonArea>
-          <StyledButton onClick={click} size="large" loading={loading}>
+          <StyledButton onClick={signIn} size="large" loading={loading}>
             Sign In
           </StyledButton>
         </ButtonArea>

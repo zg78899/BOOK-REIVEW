@@ -12,5 +12,4 @@ const mapDispatchToProps = dispatch => ({
     dispatch(loginSaga(email, password));
   }
 });
-
 export default connect(mapStateToProps, mapDispatchToProps)(SigninForm);

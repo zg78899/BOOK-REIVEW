@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Navs from '../components/Navs';
+import NavContainer from '../containers/NavContainer';
 
 const StyledWrapper = styled.div`
 display:flex;
@@ -9,7 +9,7 @@ align-items:center;
 justify-items:center;
 transform: translateY(91px);
 .not-found{
-  width:50%;
+  width:calc(100% - width);
 }
 p{
   align-items:center;
@@ -46,7 +46,7 @@ button{
   }
 `;
 
-function NotFound({ history ,logout}) {
+function NotFound({ history }) {
 
   const goBack = () => {
     history.goBack();
@@ -56,7 +56,7 @@ function NotFound({ history ,logout}) {
   }
   return (
     <div>
-      <Navs logout={logout}/>
+      <NavContainer/>
       <StyledWrapper>
         <img className="not-found" src="/notFound.png" alt="notFound" />
         <p>

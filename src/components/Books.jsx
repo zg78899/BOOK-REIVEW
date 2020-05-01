@@ -85,7 +85,6 @@ const Books = ({
 
   useEffect(() => {
     requestBooks();
-
   }, [requestBooks]);
 
   return (

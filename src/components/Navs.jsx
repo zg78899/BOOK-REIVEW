@@ -36,11 +36,11 @@ text-align:right;
    }
 `;
 
-const PopupContent =styled.div`
+const PopupContent = styled.div`
 text-align:center;
 `;
 
-function Navs({ token,requestBooks,logout }) {
+function Navs({ token, requestBooks, logout }) {
   const [visible, setVisible] = useState(false);
   const history = useHistory();
 
@@ -51,19 +51,18 @@ function Navs({ token,requestBooks,logout }) {
   const handleCancel = e => {
     setVisible(false);
   };
- function click(){
-  logout(token);
-}
-console.log(logout(token));
-console.log(typeof logout());
+  const signOut=()=> {
+    logout();
+  }
+
   return (
     <NavWrapper>
       <Link to="/">
         <LogoImg src="/books.png" alt="bokks_review" />
-        <b style={{paddingLeft:10, color:'inherit'}}>BOOK REVIEW</b>
+        <b style={{ paddingLeft: 10, color: 'inherit' }}>BOOK REVIEW</b>
       </Link>
-      
-      <NavList key ={uuidv4()}>
+
+      <NavList key={uuidv4()}>
         <li>
           <StyledButton onClick={showModal}>
             책 추가하기
@@ -75,7 +74,7 @@ console.log(typeof logout());
           </StyledButton>
         </li>
         <li>
-          <StyledButton onClick={click}>
+          <StyledButton onClick={signOut}>
             로그아웃
             </StyledButton>
         </li>
@@ -92,7 +91,7 @@ console.log(typeof logout());
             requestBooks={requestBooks}
             visible={visible}
             setVisible={setVisible}
-             />
+          />
         </PopupContent>
       </Modal>
 

@@ -1,22 +1,19 @@
 import { takeEvery, takeLatest, put, call, select } from 'redux-saga/effects'
 import loginService from '../../services/loginService';
 import { push } from 'connected-react-router';
-import { createActions, handleActions ,createAction} from 'redux-actions';
+import { createActions, handleActions } from 'redux-actions';
 
 const options = {
   prefix: 'books-review/auth'
 };
-const { loginPending, loginSuccess, loginFail } = createActions(
+const { loginFail, loginPending, loginSuccess } = createActions(
   {
-  LOGIN_SUCCESS: token => ({ token })
-},
+    LOGIN_SUCCESS: token => ({ token })
+  },
   'LOGIN_PENDING',
   'LOGIN-FAIL',
   options
 )
-
-// export const loginSaga = createAction('START_LOGIN_SAGA');
-// export const logoutSaga = createAction('LOGOUT_SAGA');
 
 const START_LOGIN_SAGA = '"book-review/auth/START_LOGIN_SAGA';
 const LOGOUT_SAGA = "book-review/auth/LOGOUT_SAGA";
@@ -29,36 +26,35 @@ export const loginSaga = (email, password) => ({
     password
   }
 });
-export const logoutSaga = () => ({
+
+export const logoutSaga = (token) => ({
   type: LOGOUT_SAGA,
+  token
 });
 
-
 //실제 동작할 사가 함수
-export function* login(action) {
-
+ function* login(action) {
   try {
     yield put(loginPending());
-    const response = yield call(loginService.login,action.payload);
-    //loclStoragedㅔ 알려주고 
-    localStorage.setItem('token', response.data.token);
-    //reduxdp 알려준다
-    yield put(loginSuccess(response.data.token));
+    const res = yield call(loginService.login, action.payload);
+    console.log(res.data.token)
+    localStorage.setItem('token', res.data.token);
+    yield put(loginSuccess(res.data.token));
     yield put(push('/'));
   } catch (error) {
     yield put(loginFail(error));
   }
 }
 
-export function* logout() {
-  try {
-    const token = yield select(state => state.auth.token);
+ function* logout() {
+   const token = yield select(state => state.auth.token);
+   try {
     yield call(loginService.logout, token);
   } catch (error) {
     yield put(loginFail(error));
   }
-  yield put(loginSuccess(null));
   localStorage.removeItem('token');
+  yield put(loginSuccess(null));
   yield put(push('/signin'));
 }
 //두개를 이어준다.
@@ -86,12 +82,13 @@ const auth = handleActions({
     error: null
   }),
   LOGIN_FAIL: (state, action) => ({
-    token:null,
+    token: null,
     loading: false,
     error: action.payload
   })
 },
   initalState,
-  options)
+  options
+);
 
 export default auth;
