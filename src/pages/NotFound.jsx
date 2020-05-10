@@ -2,14 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 import NavContainer from '../containers/NavContainer';
 
+
 const StyledWrapper = styled.div`
 display:flex;
 flex-direction:column;
 align-items:center;
 justify-items:center;
 transform: translateY(91px);
+
 .not-found{
   width:calc(100% - width);
+  position:relative;
 }
 p{
   align-items:center;
@@ -36,6 +39,7 @@ button{
     img{
     transform: translateY(-2px);
     margin-right: 5px;
+    
     }
   }
   .home{
@@ -48,6 +52,7 @@ button{
 
 function NotFound({ history }) {
 
+
   const goBack = () => {
     history.goBack();
   }
@@ -56,26 +61,29 @@ function NotFound({ history }) {
   }
   return (
     <div>
-      <NavContainer/>
+      <NavContainer />
       <StyledWrapper>
         <img className="not-found" src="/notFound.png" alt="notFound" />
-        <p>
-          <span>OPPS!!</span>
+        <div style={{position:'absolute',top:'15%'}}>
+          <p>
+            <span>OPPS!!</span>
            &nbsp;&nbsp;찾을 수 없는 페이지 입니다.
         </p>
-        <StyledButtonWrapper>
-          <button className="back" onClick={goBack}>
-            <img src="/icon1.png" alt="left" />
+          <StyledButtonWrapper>
+            <button className="back" onClick={goBack}>
+              <img src="/icon1.png" alt="left" />
             뒤로 가기
             </button>
-          <button className="home" onClick={goHome}>
-            홈페이지로 이동
+            <button className="home" onClick={goHome}>
+              홈페이지로 이동
             <img src="/icon.png" alt="right" />
-          </button>
-        </StyledButtonWrapper>
+            </button>
+          </StyledButtonWrapper>
+        </div>
+        
       </StyledWrapper>
-
     </div>
+
   )
 
 }

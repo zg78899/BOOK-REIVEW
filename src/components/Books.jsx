@@ -2,15 +2,17 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Spin } from 'antd';
 import { v4 as uuidv4 } from 'uuid';
-import { Table, Skeleton } from 'antd';
-import { MdDelete } from 'react-icons/md';
+import { Table, Skeleton} from 'antd';
+import {BookOutlined} from '@ant-design/icons';
+import moment from 'moment';
+import { MdDelete} from 'react-icons/md';
 import EditButtonContainer from '../containers/EditButtonContainer';
 
 const LoadingWrapper = styled.div`
 border:1px solid #dddfe5;
  border-radius: 10px;
  height:235.5px;
- margin-top: ${props =>props.top || 0}px;
+ margin-top: ${props => props.top || 0}px;
 `;
 
 const StyledButton = styled.div`
@@ -87,9 +89,12 @@ const Books = ({
     requestBooks();
   }, [requestBooks]);
 
+  if (error !== null) {
+    return <p>{error.message}</p>
+  }
+
   return (
     <div>
-      {error !== null && <p>{error.message}</p>}
       <Table
         dataSource={books === [] ? [] : books}
         columns={[
@@ -99,7 +104,7 @@ const Books = ({
             key: 'book',
             render: (text, record) => (
               <div
-                key ={uuidv4()}
+                key={uuidv4()}
                 style={{
                   border: '1px solid #28546a',
                   borderRadius: 10,
@@ -107,10 +112,14 @@ const Books = ({
                   margin: 10,
                 }}
               >
-                <h2 style={{ borderBottom: '1px solid #dddef5', textAlign: 'center' }}>
-                  Title
+                <h2 style={{ textAlign: 'center',margin:0 }}>
+                <BookOutlined />&nbsp;Title
       <StyledSpan /> :&nbsp;{record.title}
-                </h2><EditButtonContainer key={uuidv4()} bookId={record.bookId} />
+                </h2>
+                <p style={{borderBottom: '1px solid #dddef5',textAlign:'center',paddingBottom:'10px'}}>
+                  {` - ${moment(record.createdAt).format("YYYY-MM-DD hh:mm:a")} - `}
+                </p>
+                <EditButtonContainer key={uuidv4()} bookId={record.bookId} />
                 <StyledContentWrapepr>
                   <p>
                     Author
@@ -144,17 +153,17 @@ const Books = ({
                 </LoadingSection>}
               <LoadingWrapper>
                 <Skeleton paragraph={{
-                  rows:5
+                  rows: 5
                 }} active />
               </LoadingWrapper>
               <LoadingWrapper top={40}>
                 <Skeleton paragraph={{
-                  rows:5
+                  rows: 5
                 }} active />
               </LoadingWrapper>
               <LoadingWrapper top={40}>
                 <Skeleton paragraph={{
-                  rows:5
+                  rows: 5
                 }} active />
               </LoadingWrapper>
             </div>
@@ -162,7 +171,7 @@ const Books = ({
         }}
         pagination={{
           pageSize: 5,
-          position:['bottomCenter'],
+          position: ['bottomCenter'],
         }}
         style={{
           marginTop: 10,

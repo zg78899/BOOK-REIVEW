@@ -122,11 +122,11 @@ function SigninForm({loading,error,login }) {
       message.error('로그인에 문제가 있습니다.');
     }
   },[error]);
-
-  // const Enter =async (e)=>{
-  //   if(e.keyCode !== 13)return;
-  //   signIn();
-  // }
+ 
+  const Enter =(e)=>{
+    if(e.keyCode !== 13) return ;
+    signIn();
+  }
 
   return (
     <StyledCol>
@@ -155,7 +155,7 @@ function SigninForm({loading,error,login }) {
             type="password"
             placeholder="Enter your password"
             ref={passwordInput}
-            // onKeyDown={e=>Enter(e)}
+            onKeyDown={e=>Enter(e)}
           />
         </div>
         <ButtonArea>

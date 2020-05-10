@@ -24,7 +24,7 @@ function EditButton({ requestBooks, bookId }) {
   const handleCancel = (e) => {
     setVisible(false);
   }
-  console.log(bookId);
+  // console.log(bookId);
   return (
     <div>
       <EditModalButton onClick={showModal} >

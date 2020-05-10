@@ -25,12 +25,12 @@ export const editBookSaga = createAction('EDIT_BOOK_SAGA');
 
 export function* requestBooks() {
   const token = yield select(state => state.auth.token);
-  console.log(token);
+  // console.log(token);
   try {
     yield put(getBooksPending());
     const response = yield call(bookService.getBooks, token);
-    console.log(response);
-    console.log(response.data);
+    // console.log(response);
+    // console.log(response.data);
     yield delay(1000);
     const books = response.data;
     yield put(getBooksSuccess(books));

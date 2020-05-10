@@ -37,7 +37,7 @@ export const logoutSaga = (token) => ({
   try {
     yield put(loginPending());
     const res = yield call(loginService.login, action.payload);
-    console.log(res.data.token)
+    // console.log(res.data.token)
     localStorage.setItem('token', res.data.token);
     yield put(loginSuccess(res.data.token));
     yield put(push('/'));
