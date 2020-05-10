@@ -60,7 +60,7 @@ function* addBook(books) {
     const res = yield call(bookService.addBook, token, books.payload.book);
     yield delay(500);
     yield put(
-      getBooksSuccess([...books.payload.books, { ...res.data }]),
+      getBooksSuccess([...books.payload.books,{...res.data} ]),
     );
 
   } catch (error) {
